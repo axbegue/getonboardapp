@@ -14,31 +14,19 @@ export class JobsFilterComponent implements OnInit {
     category: new FormControl(''),
     company: new FormControl(''),
   });
+  inputFormatter = (entity: Category) => entity ? entity.attributes.name : '';
   public categories: Category[] = [];
-  filteredOptions!: Observable<readonly Category[]>;
-  states = [
-    {code: 'AL', name: 'Alabama'},
-    {code: 'CA', name: 'California'},
-    {code: 'FL', name: 'Florida'},
-    {code: 'KS', name: 'Kansas'},
-    {code: 'MA', name: 'Massachusetts'},
-    {code: 'NY', name: 'New York'},
-    {code: 'OR', name: 'Oregon'},
-    {code: 'PA', name: 'Pennsylvania'},
-    {code: 'TN', name: 'Tennessee'},
-    {code: 'VA', name: 'Virginia'},
-    {code: 'WY', name: 'Wyoming'},
-  ];
+
   constructor(private categoryServices: CategoryBackendService) {}
 
   ngOnInit(): void {
-    // forkJoin();
-    // this.categoryServices
-    //   .search()
-    //   .pipe(take(1))
-    //   .subscribe((response) => {
-    //     this.categories = response.data;
-    //     console.log(response);
-    //   });
+    forkJoin();
+    this.categoryServices
+      .search()
+      .pipe(take(1))
+      .subscribe((response) => {
+        this.categories = response.data;
+        console.log(response);
+      });
   }
 }

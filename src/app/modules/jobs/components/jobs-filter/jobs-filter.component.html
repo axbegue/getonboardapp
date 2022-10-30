@@ -1,21 +1,15 @@
-<!-- <form class="form" [formGroup]="filtersFrom">
+<form class="form" [formGroup]="filtersFrom">
   <input
     type="text"
     class="form-control"
     placeholder="Category"
     aria-label="Number"
+    formControlName="category"
     [matAutocomplete]="auto"
   />
-  <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-      {{ option }}
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="inputFormatter">
+    <mat-option *ngFor="let option of categories" [value]="option">
+      {{ option.attributes.name }}
     </mat-option>
   </mat-autocomplete>
-</form> -->
-
-<mat-autocomplete #autocomplete="matAutocomplete">
-  <mat-option *ngFor="let state of states" [value]="state.code">{{ state.name }}</mat-option>
-</mat-autocomplete>
-
-<input id="plain" [matAutocomplete]="autocomplete">
-
+</form>
